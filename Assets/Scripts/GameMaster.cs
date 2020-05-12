@@ -12,13 +12,25 @@ public class GameMaster : MonoBehaviour
     [HideInInspector] public UnitScript selectedUnit;
 
     [Header("Game Generator")]
+    public EnemyScript[] enemies;
     public float numberEnemies;
     public float Ingredients;
     public GameObject Enemy;
 
+    [HideInInspector] public bool submitButInUse;
+
     public void ResetTiles(){
       foreach(GameObject tile in tiles){
         tile.GetComponent<TileScript>().Reset();
+      }
+    }
+
+    void Update(){
+      if(Input.GetButtonDown("Submit")){
+        submitButInUse = true;
+      }
+      if(Input.GetButtonUp("Submit")){
+        submitButInUse = false;
       }
     }
 

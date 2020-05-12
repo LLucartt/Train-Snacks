@@ -4,17 +4,82 @@ using UnityEngine;
 
 public class UnitScript : MonoBehaviour
 {
+    [Header("Movement")]
     public bool selected;
-    GameMaster gm;
     public int tileSpeed;
     public bool hasMoved;
     public float moveSpeed;
+    public CharacterInfoScript characterInfo;
+
+    GameMaster gm;
+    PlayerControllerScript pc;
+
+    //public bool playerDecide;
+
+    [Header("Attack")]
+    List<EnemyScript> enemiesInRange = new List<EnemyScript>();
+    private GameObject weaponIcon, AimedAttackTile;
+    public bool hasAttacked;
+    private List<GameObject> attackTiles = new List<GameObject>();
+    private int currentAttackTileNumber;
 
     private void Start(){
       gm = GameMaster.current;
+      pc = PlayerControllerScript.current;
     }
 
+    void Update(){
+      if(!pc.inventoryOpen){
+        if(Input.GetButtonDown("Submit") && pc.selectedCharacter == this.gameObject && !pc.chooseHungryChar){
+          selectedUnit();
+        }
+
+        if(selected && Input.GetButtonDown("Cancel")){
+          UnselectUnit();
+        }
+
+        if(Input.GetButtonDown("Cancel") && pc.chooseHungryChar){
+          ResetFeedingSes();
+        }
+
+        if(Input.GetButtonDown("Submit") && pc.selectedCharacter == this.gameObject && pc.chooseHungryChar){
+          if(pc.attackTypeUnit == "Single" && attackTiles != null){
+            pc.takeAim = true;
+          }
+        }
+
+        if(pc.takeAim == true && pc.selectedTile.GetComponent<TileScript>().readyForAttack){
+          pc.selectedTile.GetComponent<TileScript>().HighlightForAttack();
+          if(Input.GetButtonDown("Submit")){
+            feedCharacter();
+          }
+        }
+      }
+
+    }
+
+    void feedCharacter(){
+      Debug.Log("Attack!!");
+      pc.feedingFood.RemoveFromInventory();
+      ResetFeedingSes();
+    }
+
+    /*
     private void OnMouseDown(){
+      selectedUnit();
+    }*/
+
+    void UnselectUnit(){
+      if(selected == true){
+          selected = false;
+          gm.selectedUnit = null;
+          gm.ResetTiles();
+      }
+    }
+
+    void selectedUnit(){
+      resetWeaponIcons();
+
       if(selected == true){
           selected = false;
           gm.selectedUnit = null;
@@ -28,7 +93,9 @@ public class UnitScript : MonoBehaviour
           gm.selectedUnit = this;
 
           gm.ResetTiles();
+          GetEnemies();
           GetWalkableTiles();
+          //playerDecide = true;
       }
     }
 
@@ -44,6 +111,31 @@ public class UnitScript : MonoBehaviour
           }
         }
       }
+    }
+
+    public void GetCombatTiles(){
+      pc.planAttack = true;
+
+      foreach(GameObject tile in gm.tiles){
+        if(pc.attackDirectionUnit == "xy" &&  tile != pc.selectedTile){
+          if(Mathf.Abs(transform.position.x - tile.transform.position.x) + Mathf.Abs(transform.position.y - tile.transform.position.y) <= pc.attackRangeUnit){
+              tile.GetComponent<TileScript>().Highlight();
+              attackTiles.Add(tile);
+          }
+        }
+      }
+
+
+      /*
+      if(AimedAttackTile == null){
+        currentAttackTileNumber = 0;
+      }
+
+      if(pc.attackTypeUnit == "Single" && attackTiles != null){
+        AimedAttackTile = attackTiles[currentAttackTileNumber];
+        AimedAttackTile.GetComponent<TileScript>().HighlightForAttack();
+        pc.takeAim = true;
+      }*/
     }
 
     public void Move(Vector2 tilePos){
@@ -62,6 +154,37 @@ public class UnitScript : MonoBehaviour
       }
 
       hasMoved = true;
+      resetWeaponIcons();
+      GetEnemies();
+      UnselectUnit();
     }
+
+    void GetEnemies(){
+      enemiesInRange.Clear();
+
+      foreach (EnemyScript enemy in gm.enemies) {
+        if(Mathf.Abs(transform.position.x - enemy.transform.position.x) + Mathf.Abs(transform.position.y - enemy.transform.position.y) <= pc.attackRangeUnit){
+            if(!hasAttacked){
+              enemiesInRange.Add(enemy);
+              enemy.weaponIcon.SetActive(true);
+            }
+          }
+        }
+      }
+
+      void resetWeaponIcons(){
+        foreach (EnemyScript enemy in gm.enemies) {
+          enemy.weaponIcon.SetActive(false);
+        }
+      }
+
+      void ResetFeedingSes(){
+        pc.chooseHungryChar = false;
+        pc.feedingFood = null;
+        pc.instantInv();
+        pc.takeAim = false;
+        pc.planAttack = false;
+        gm.ResetTiles();
+      }
 
 }
