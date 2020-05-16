@@ -79,18 +79,25 @@ public class TileScript : MonoBehaviour
         readyForAttack = true;
       }
     }
+
     public void HighlightForAttack(){
       sr.color = highlightedAttackColor;
     }
+
     public void Reset(){
       sr.color = Color.white;
       isWalkable = false;
       readyForAttack = false;
+      if(pc.planAttack){
+        pc.attackTiles.Clear();
+        pc.AffectedTiles.Clear();
+      }
     }
 
     void OnTriggerExit2D (Collider2D col){
       if(sr.color == highlightedAttackColor){
         sr.color = highlightedColor;
+        pc.AffectedTiles.Clear();
       }
     }
 /*

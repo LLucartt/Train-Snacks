@@ -20,7 +20,6 @@ public class UnitScript : MonoBehaviour
     List<EnemyScript> enemiesInRange = new List<EnemyScript>();
     private GameObject weaponIcon, AimedAttackTile;
     public bool hasAttacked;
-    private List<GameObject> attackTiles = new List<GameObject>();
     private int currentAttackTileNumber;
 
     private void Start(){
@@ -39,21 +38,24 @@ public class UnitScript : MonoBehaviour
         }
 
         if(Input.GetButtonDown("Cancel") && pc.chooseHungryChar){
+          pc.instantInv();
           ResetFeedingSes();
         }
 
         if(Input.GetButtonDown("Submit") && pc.selectedCharacter == this.gameObject && pc.chooseHungryChar){
-          if(pc.attackTypeUnit == "Single" && attackTiles != null){
+          if(pc.attackTypeUnit == "Single" && pc.attackTiles != null){
             pc.takeAim = true;
           }
         }
 
         if(pc.takeAim == true && pc.selectedTile.GetComponent<TileScript>().readyForAttack){
-          pc.selectedTile.GetComponent<TileScript>().HighlightForAttack();
+            GetAffectedTiles();
+
           if(Input.GetButtonDown("Submit")){
             feedCharacter();
           }
         }
+
       }
 
     }
@@ -64,26 +66,22 @@ public class UnitScript : MonoBehaviour
       ResetFeedingSes();
     }
 
-    /*
-    private void OnMouseDown(){
-      selectedUnit();
-    }*/
-
     void UnselectUnit(){
       if(selected == true){
           selected = false;
           gm.selectedUnit = null;
           gm.ResetTiles();
+          pc.attackTiles.Clear();
       }
     }
 
     void selectedUnit(){
-      resetWeaponIcons();
+      //resetWeaponIcons();
 
       if(selected == true){
           selected = false;
-          gm.selectedUnit = null;
           gm.ResetTiles();
+          gm.selectedUnit = null;
       } else{
           if(gm.selectedUnit != null){
             gm.selectedUnit.selected = false;
@@ -93,7 +91,7 @@ public class UnitScript : MonoBehaviour
           gm.selectedUnit = this;
 
           gm.ResetTiles();
-          GetEnemies();
+          pc.attackTiles.Clear();
           GetWalkableTiles();
           //playerDecide = true;
       }
@@ -113,29 +111,43 @@ public class UnitScript : MonoBehaviour
       }
     }
 
-    public void GetCombatTiles(){
+    public void GetCombatTiles(){ //preperng for battle; when hovering over unit with food
+      pc.attackTiles.Clear();
       pc.planAttack = true;
 
       foreach(GameObject tile in gm.tiles){
-        if(pc.attackDirectionUnit == "xy" &&  tile != pc.selectedTile){
-          if(Mathf.Abs(transform.position.x - tile.transform.position.x) + Mathf.Abs(transform.position.y - tile.transform.position.y) <= pc.attackRangeUnit){
+        //attack only horizontal
+        if(pc.attackDirectionUnit == "x" &&  tile != pc.selectedTile){
+          if((Mathf.Abs(transform.position.x - tile.transform.position.x) <= pc.attackRangeUnit && Mathf.Abs(transform.position.y - tile.transform.position.y) == 0)){
               tile.GetComponent<TileScript>().Highlight();
-              attackTiles.Add(tile);
+              pc.attackTiles.Add(tile);
           }
         }
+        //attack only Vertical
+        if(pc.attackDirectionUnit == "y" &&  tile != pc.selectedTile){
+          if((Mathf.Abs(transform.position.y - tile.transform.position.y) <= pc.attackRangeUnit && Mathf.Abs(transform.position.x - tile.transform.position.x) == 0)){
+              tile.GetComponent<TileScript>().Highlight();
+              pc.attackTiles.Add(tile);
+          }
+        }
+        //attack horizontal & Vertical in a straight line
+        if(pc.attackDirectionUnit == "xy" &&  tile != pc.selectedTile){
+          if((Mathf.Abs(transform.position.x - tile.transform.position.x) <= pc.attackRangeUnit && Mathf.Abs(transform.position.y - tile.transform.position.y) == 0) ||
+                (Mathf.Abs(transform.position.y - tile.transform.position.y) <= pc.attackRangeUnit && Mathf.Abs(transform.position.x - tile.transform.position.x) == 0)){
+              tile.GetComponent<TileScript>().Highlight();
+              pc.attackTiles.Add(tile);
+          }
+        }
+
+        //attack in radius
+        if(pc.attackDirectionUnit == "o" &&  tile != pc.selectedTile){
+          if((Mathf.Abs(transform.position.x - tile.transform.position.x) + Mathf.Abs(transform.position.y - tile.transform.position.y)) <= pc.attackRangeUnit){
+              tile.GetComponent<TileScript>().Highlight();
+              pc.attackTiles.Add(tile);
+          }
+        }
+
       }
-
-
-      /*
-      if(AimedAttackTile == null){
-        currentAttackTileNumber = 0;
-      }
-
-      if(pc.attackTypeUnit == "Single" && attackTiles != null){
-        AimedAttackTile = attackTiles[currentAttackTileNumber];
-        AimedAttackTile.GetComponent<TileScript>().HighlightForAttack();
-        pc.takeAim = true;
-      }*/
     }
 
     public void Move(Vector2 tilePos){
@@ -154,11 +166,11 @@ public class UnitScript : MonoBehaviour
       }
 
       hasMoved = true;
-      resetWeaponIcons();
-      GetEnemies();
+      //resetWeaponIcons();
+      //GetEnemies();
       UnselectUnit();
     }
-
+/*
     void GetEnemies(){
       enemiesInRange.Clear();
 
@@ -170,21 +182,39 @@ public class UnitScript : MonoBehaviour
             }
           }
         }
-      }
-
+      }*/
+/*
       void resetWeaponIcons(){
         foreach (EnemyScript enemy in gm.enemies) {
           enemy.weaponIcon.SetActive(false);
         }
-      }
+      }*/
 
       void ResetFeedingSes(){
         pc.chooseHungryChar = false;
         pc.feedingFood = null;
-        pc.instantInv();
         pc.takeAim = false;
         pc.planAttack = false;
+        pc.attackTiles.Clear();
         gm.ResetTiles();
+      }
+
+      void GetAffectedTiles(){
+        pc.AffectedTiles.Clear();
+        if(pc.attackTiles == null ){
+          return;
+        }
+
+          if(pc.attackTypeUnit == "Single"){
+            pc.AffectedTiles.Add(pc.selectedTile);
+          }
+          if(pc.attackTypeUnit == "yLine"){
+
+          }
+
+          foreach (GameObject tile in pc.AffectedTiles) {
+            tile.GetComponent<TileScript>().HighlightForAttack();
+          }
       }
 
 }

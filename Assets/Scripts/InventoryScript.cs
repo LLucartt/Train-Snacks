@@ -10,7 +10,7 @@ public class InventoryScript : MonoBehaviour
     public delegate void OnIngredientChanged();
     public OnIngredientChanged OnIngredientChangedCallback;
 
-    public int ingredientSpace = 5;
+    public int ingredientSpace = 3;
     public List<IngedientObjectScript> ingredients = new List<IngedientObjectScript>();
 
 

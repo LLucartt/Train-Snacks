@@ -20,5 +20,6 @@ MonoBehaviour:
   flavourStat: 1
   Nutitiousness: 0
   healAmount: 0
-  attackRange: 1
+  attackRange: 2
   attackDirection: 0
+  attackType: 0

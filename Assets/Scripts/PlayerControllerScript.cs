@@ -37,6 +37,8 @@ public class PlayerControllerScript : MonoBehaviour
     public string attackTypeUnit;
     [HideInInspector] public bool chooseHungryChar, planAttack, takeAim;
     [HideInInspector] public IngedientObjectScript feedingFood;
+    public List<GameObject> attackTiles = new List<GameObject>();
+    public List<GameObject> AffectedTiles = new List<GameObject>();
 
 
 
