@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2513f23d2326174e9e296e9cfe7527b, type: 3}
+  m_Name: Me2
+  m_EditorClassIdentifier: 
+  IngrCode: Me2
+  IngredientImage: {fileID: 21300000, guid: ee3055fca1204ee4aaac5ae897199817, type: 3}
+  IngredientName: Cloud Surfer
+  IngredientDesciption: golden wings and forever flying
+  MainAbility: gold has said to give you a protective shield
+  SecondAbility: not implemented
+  IngredientQuality: 0
+  IngredientCatagory: Meat
+  IngredientTier: Uncommon

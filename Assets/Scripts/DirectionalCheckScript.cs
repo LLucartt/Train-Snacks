@@ -9,12 +9,10 @@ public class DirectionalCheckScript : MonoBehaviour
     [SerializeField] bool right = false;
     [SerializeField] bool up = false;
     [SerializeField] bool down = false;
-    PlayerControllerScript pc;
-    GameMaster gm;
+    PC pc;
 
     void Start(){
-      pc = PlayerControllerScript.current;
-      gm = GameMaster.current;
+      pc = PC.current;
     }
 
     void FixedUpdate(){
@@ -39,21 +37,13 @@ public class DirectionalCheckScript : MonoBehaviour
           pc.DownCheck = col.gameObject;
         }
       }
-
-      if(col.gameObject.tag == "Player"){
-        if(main){
-          pc.selectedCharacter = col.gameObject;
-          pc.DisplayCharacterInfo();
-        }
-      }
-
-
+/*
       if(col.gameObject.tag == "Ingredient"){
         if(main){
           pc.selectedIngredient = col.gameObject;
           pc.DisplayFoodInfo();
         }
-      }
+      }*/
 
       if(col.gameObject.tag == "Wall"){
           if(right){
@@ -69,24 +59,24 @@ public class DirectionalCheckScript : MonoBehaviour
             pc.DownCheck = null;
           }
         }
+
+    }
+
+    void OnTriggerStay2D (Collider2D col){
+      if(col.gameObject.tag == "Ingredient"){
+        if(main){
+          pc.selectedIngredient = col.gameObject;
+          pc.DisplayFoodInfo();
+        }
+      }
     }
 
     void OnTriggerExit2D (Collider2D col){
-      if(main && col.gameObject.tag == "Player"){
-        if(!col.gameObject.GetComponent<UnitScript>().selected){
+      if(col.gameObject.tag == "Ingredient"){
+        if(main){
           pc.ResetInfo();
+          pc.selectedIngredient = null;
         }
-        if(pc.chooseHungryChar && !pc.takeAim){
-          pc.planAttack = false;
-          gm.ResetTiles();
-        }
-
-        pc.selectedCharacter = null;
-      }
-
-      if(main && col.gameObject.tag == "Ingredient"){
-        pc.selectedIngredient = null;
-        pc.ResetInfo();
       }
     }
 

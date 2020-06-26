@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5b076b4a95df24295607957cc08e17, type: 3}
+  m_Name: Luz
+  m_EditorClassIdentifier: 
+  characterPort: {fileID: 0}
+  inGameChar: {fileID: 0}
+  name: Luz
+  maxHealth: 100
+  currentHealth: 0
+  stamina: 4
+  FavFood: {fileID: 11400000, guid: b32c346ed438c4644978bafe9d2239f6, type: 2}
+  DislikeFood: {fileID: 11400000, guid: 297379e79542f4f41a93fff636a4be11, type: 2}
+  Intolerance: {fileID: 11400000, guid: 79019a2e8375c6f429626a59060ea127, type: 2}

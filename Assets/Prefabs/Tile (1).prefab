@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7226656803473542712}
   - component: {fileID: 3272718587021751685}
-  - component: {fileID: 4976682891148832242}
   - component: {fileID: 6701485870618108931}
+  - component: {fileID: 6722207891378564222}
   m_Layer: 10
   m_Name: Tile (1)
   m_TagString: Tile
@@ -40,7 +40,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5425790466212008979}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -51,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 02bad0ae860a16645a6375c5ce2bb7ae, type: 3}
-  m_Color: {r: 0.7028302, g: 1, b: 0.922703, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.56078434}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -83,28 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4976682891148832242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5425790466212008979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c703d60ef1125f84e80d2ece5e8aadb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileGraphics:
-  - {fileID: 21300000, guid: 02bad0ae860a16645a6375c5ce2bb7ae, type: 3}
-  hoverAmount: 0.03
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  highlightedColor: {r: 1, g: 0.9096273, b: 0.7019608, a: 1}
-  highlightedAttackColor: {r: 1, g: 0.5330188, b: 0.5330188, a: 1}
-  isWalkable: 0
-  isClearBool: 1
 --- !u!61 &6701485870618108931
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,3 +109,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6722207891378564222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5425790466212008979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8504818b0815c440acb58e0c01674fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientLayer:
+    serializedVersion: 2
+    m_Bits: 8192

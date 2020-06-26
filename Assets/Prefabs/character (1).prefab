@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3417586717235638157}
   - component: {fileID: 5293030757146883732}
   - component: {fileID: 2384592927156846044}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: character (1)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7376332557718105235}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 2, z: -1}
+  m_LocalPosition: {x: -1.01, y: -1.57, z: 0}
   m_LocalScale: {x: 0.62463, y: 0.62463, z: 0.62463}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,12 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  tileSpeed: 0
   hasMoved: 0
-  moveSpeed: 0
   characterInfo: {fileID: 0}
-  playerDecide: 0
-  attackRange: 0
   hasAttacked: 0
 --- !u!61 &5293030757146883732
 BoxCollider2D:
@@ -114,7 +110,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

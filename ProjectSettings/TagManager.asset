@@ -7,6 +7,10 @@ TagManager:
   - Tile
   - Wall
   - Ingredient
+  - PlayerSelectBox
+  - MainIngrSlot
+  - SecondIngrSlot
+  - ThirdIngrSlot
   layers:
   - Default
   - TransparentFX
@@ -17,11 +21,11 @@ TagManager:
   - 
   - 
   - Obstacle
-  - tileCheck
+  - 
   - tiles
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - Ingredient
   - 
   - 
   - 

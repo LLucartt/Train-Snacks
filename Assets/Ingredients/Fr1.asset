@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2513f23d2326174e9e296e9cfe7527b, type: 3}
+  m_Name: Fr1
+  m_EditorClassIdentifier: 
+  IngrCode: Fr1
+  IngredientImage: {fileID: 21300000, guid: bbe659f1faa78cd4b8ae97a864297e00, type: 3}
+  IngredientName: Opal Fruit
+  IngredientDesciption: Opal fruit come in lots of variations; this is a black opal
+  MainAbility: an opal fruit with healing properties
+  SecondAbility: not implemented
+  IngredientQuality: 0
+  IngredientCatagory: Fruit
+  IngredientTier: Common
