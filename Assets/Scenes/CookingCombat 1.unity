@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6831,6 +6831,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1557199451}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &892472738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4805522942695962139, guid: 0145103bd2ee46e40bc721a42157b633,
+    type: 3}
+  m_PrefabInstance: {fileID: 1557199451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892472736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f666f856a57e54fbd3793504cc4bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896265615
 GameObject:
   m_ObjectHideFlags: 0
@@ -12509,6 +12521,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 30375224965645417, guid: 0145103bd2ee46e40bc721a42157b633,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30375224965645417, guid: 0145103bd2ee46e40bc721a42157b633,
+        type: 3}
       propertyPath: m_Colors.m_NormalColor.r
       value: 0.6509434
       objectReference: {fileID: 0}
@@ -12526,6 +12543,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Interactable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 30375224965645417, guid: 0145103bd2ee46e40bc721a42157b633,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30375224965645417, guid: 0145103bd2ee46e40bc721a42157b633,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 30375224965645417, guid: 0145103bd2ee46e40bc721a42157b633,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 892472738}
+    - target: {fileID: 30375224965645417, guid: 0145103bd2ee46e40bc721a42157b633,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: chooseEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 30375224965645417, guid: 0145103bd2ee46e40bc721a42157b633,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 30375225438115599, guid: 0145103bd2ee46e40bc721a42157b633,
         type: 3}
@@ -14623,6 +14665,8 @@ MonoBehaviour:
   EnemyLocationInBattle: {fileID: 610102194}
   prevEnemyLoc: {fileID: 1137777853}
   charAttacking: 0
+  Enemies: []
+  characterAttacking: {fileID: 0}
   allowInput: 1
 --- !u!114 &1753445303
 MonoBehaviour:

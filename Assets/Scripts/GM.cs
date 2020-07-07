@@ -113,7 +113,10 @@ public class GM : MonoBehaviour
     [SerializeField] Transform EnemyLocationInBattle;
     [SerializeField] Transform prevEnemyLoc;
     [HideInInspector] public bool charAttacking;
+    public List<CharacterCardScript> Enemies = new List<CharacterCardScript>();
+    [HideInInspector] public CharacterCardScript characterAttacking;
 
+    [Header ("Controls")]
     [HideInInspector] public bool allowInput = true;
 
     void Start(){
@@ -451,13 +454,20 @@ public class GM : MonoBehaviour
       Player2Eaten = false;
       Player3Eaten = false;
 
+      AiMeal1.Clear();
+      AiMeal2.Clear();
+      AiMeal3.Clear();
+
       play1BattleCard.GetComponent<Button>().interactable = true;
       play2BattleCard.GetComponent<Button>().interactable = true;
       play3BattleCard.GetComponent<Button>().interactable = true;
 
       StartCoroutine(spawn());
       UpdateCookingPot();
-      playerContr.transform.position = StartLoctionInSlots.transform.position;
+      SwitchInventory();
+      if(playerInPot){
+        SwitchInventory();
+      }
       PC.current.ResetInfo();
       CookBookScript.current.StartCoroutine(CookBookScript.current.allowMovement());
     }
